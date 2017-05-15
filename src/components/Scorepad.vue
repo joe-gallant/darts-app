@@ -1,10 +1,6 @@
 <template>
   <div class="scorepad">
 		<div class="scorefield">{{combineScore}}<span v-if="!combineScore">0</span></div>
-		<div class="actions">
-			<div class="remove" v-on:click="undoPress">Undo</div>
-			<div class="clear" v-on:click="clearPress">Clear</div>
-		</div>
   	<div class="buttons">
 	  	<div class="pad" v-on:click="padPress(1)">1</div>
 	  	<div class="pad" v-on:click="padPress(2)">2</div>
@@ -15,6 +11,9 @@
 	  	<div class="pad" v-on:click="padPress(7)">7</div>
 	  	<div class="pad" v-on:click="padPress(8)">8</div>
 	  	<div class="pad" v-on:click="padPress(9)">9</div>
+	  	<div class="pad action" v-on:click="undoPress">Undo</div>
+	  	<div class="pad" v-on:click="padPress(9)">0</div>
+	  	<div class="pad action" v-on:click="clearPress">Clear</div>
   	</div>
 	</div>
 </template>
@@ -38,9 +37,10 @@ export default {
       return this.score.join('')
     }
   },
+  props: ['score'],
   data () {
     return {
-      score: []
+
     }
   }
 }
@@ -59,7 +59,7 @@ export default {
 
 .pad {
 	width:33.3%;
-	padding:24px;
+	padding:16px;
 	border-left:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 	float:left;
@@ -85,17 +85,7 @@ export default {
 	font-weight:bolder;
 }
 
-.actions {
-	width:100%;
+.pad.action {
+	background:#f3f3f3;
 }
-
-.actions div {
-	width:50%;
-	background:#2c3e50;
-	color:#ffffff;
-	padding:12px;
-	float:left;
-	border-right:1px solid #ccc;
-}
-
 </style>

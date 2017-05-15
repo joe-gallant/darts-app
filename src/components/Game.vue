@@ -1,11 +1,11 @@
 <template>
   <div class="game_board">
  			<div class="scoreboard">
- 				<div class="player1 score active">501</div>
- 				<div class="player2 score">501</div>
+ 				<div class="player1 score" v-bind:class="{ active: player1Turn }">{{player1Score}}</div>
+ 				<div class="player2 score" v-bind:class="{ active: !player1Turn }">{{player2Score}}</div>
  			</div>
 
- 			<scorepad></scorepad>
+ 			<scorepad :score="score"></scorepad>
 
 			<div class="button" v-on:click="submitScore">Submit score</div>
 
@@ -22,12 +22,23 @@ export default {
   },
   methods: {
     submitScore: function () {
-      console.log(this.combinedScore)
+      if (this.player1Turn) {
+        this.player1Score = this.player1Score - this.score.join('')
+        this.player1Turn = false
+        this.score = []
+      } else {
+        this.player2Score = this.player2Score - this.score.join('')
+        this.player1Turn = true
+        this.score = []
+      }
     }
   },
   data () {
     return {
-
+      player1Score: 501,
+      player2Score: 501,
+      player1Turn: true,
+      score: []
     }
   }
 }
@@ -65,7 +76,4 @@ export default {
 	border:2px solid #42b983;
 	opacity: 1;
 }
-
-
-
 </style>
