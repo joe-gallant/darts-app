@@ -2,7 +2,8 @@
   <div class="login">
     <h1>{{ msg }}</h1>
     <ul>
-      <li><router-link to="setup" class="button button-alt">Play</router-link></li>
+      <li><router-link to="setup" class="button">Quick Match</router-link></li>
+      <li><router-link to="setup" class="button button-alt">Login</router-link></li>
     </ul>
   </div>
 </template>
