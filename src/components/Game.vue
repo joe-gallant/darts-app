@@ -1,11 +1,18 @@
 <template>
   <div class="game_board">
  			<div class="scoreboard">
- 				<div class="player1 score" v-bind:class="{ active: player1Turn }">{{player1Score}}</div>
- 				<div class="player2 score" v-bind:class="{ active: !player1Turn }">{{player2Score}}</div>
+        
+        <div class="player player1" v-bind:class="{ active: player1.turn }">
+          <div class="name">{{ player1.name }}</div>
+          <div class="score">{{ player1.score }}</div>
+        </div>
+        <div class="player player2" v-bind:class="{ active: player2.turn }">
+          <div class="name">{{ player2.name }}</div>
+          <div class="score">{{ player2.score }}</div>
+        </div>
  			</div>
 
- 			<scorepad :score="score"></scorepad>
+ 			<scorepad :score="score" v-on:clearPress="resetScore"></scorepad>
 
 			<div class="button" v-on:click="submitScore">Submit score</div>
 
@@ -22,23 +29,27 @@ export default {
   },
   methods: {
     submitScore: function () {
-      if (this.player1Turn) {
-        this.player1Score = this.player1Score - this.score.join('')
-        this.player1Turn = false
-        this.score = []
-      } else {
-        this.player2Score = this.player2Score - this.score.join('')
-        this.player1Turn = true
-        this.score = []
-      }
+      this.$store.commit('submitScore', this.combineScore)
+      this.score = []
+    },
+    resetScore: function () {
+      this.score = []
     }
   },
   data () {
     return {
-      player1Score: 501,
-      player2Score: 501,
-      player1Turn: true,
       score: []
+    }
+  },
+  computed: {
+    player1 () {
+      return this.$store.state.player1
+    },
+    player2 () {
+      return this.$store.state.player2
+    },
+    combineScore: function () {
+      return this.score.join('')
     }
   }
 }
@@ -55,9 +66,35 @@ export default {
 	height:auto;
 }
 
+.player {
+  width:49%;
+  float:left;
+}
+
+.player.player2 {
+  float:right;
+}
+
+.name {
+  background:#f3f3f3;
+  padding:6px;
+  font-size:14px;
+  font-weight:bolder;
+}
+
+.player.active .score {
+  border:2px solid #42b983;
+  opacity: 1;
+}
+
+.player.active .name {
+  background:#42b983;
+  color:#fff;
+}
+
 .score {
 	height:100%;
-	width:49%;
+	width:100%;
 	background:#eaeaea;
 	border:2px solid #ccc;
 	float:left;
@@ -68,12 +105,4 @@ export default {
 	opacity: 0.5;
 }
 
-.score.player2 {
-	float:right;
-}
-
-.score.active {
-	border:2px solid #42b983;
-	opacity: 1;
-}
 </style>

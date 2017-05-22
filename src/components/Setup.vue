@@ -2,9 +2,9 @@
   <div class="setup">
     <h1>Game Setup</h1>
 
-    <input type="text" name="player1" id="player1" placeholder="Player 1">
-    <input type="text" name="player2" id="player2" placeholder="Player 2">
-		
+    <input type="text" name="player1" id="player1" placeholder="Player 1" v-model="player1.name" @input="update1Name">
+    <input type="text" name="player2" id="player2" placeholder="Player 2" v-model="player2.name" @input="update2Name">
+
 		<hr>
 
     <h3>Game mode</h3>
@@ -28,6 +28,22 @@ export default {
   data () {
     return {
 
+    }
+  },
+  computed: {
+    player1 () {
+      return this.$store.state.player1
+    },
+    player2 () {
+      return this.$store.state.player2
+    }
+  },
+  methods: {
+    update1Name (e) {
+      this.$store.commit('update1Name', e.target.value)
+    },
+    update2Name (e) {
+      this.$store.commit('update2Name', e.target.value)
     }
   }
 }

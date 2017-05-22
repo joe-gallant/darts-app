@@ -1,6 +1,6 @@
 <template>
   <div class="scorepad">
-		<div class="scorefield">{{combineScore}}<span v-if="!combineScore">0</span></div>
+		<div class="scorefield">{{ combineScore }}<span v-if="!combineScore">0</span></div>
   	<div class="buttons">
 	  	<div class="pad" v-on:click="padPress(1)">1</div>
 	  	<div class="pad" v-on:click="padPress(2)">2</div>
@@ -12,7 +12,7 @@
 	  	<div class="pad" v-on:click="padPress(8)">8</div>
 	  	<div class="pad" v-on:click="padPress(9)">9</div>
 	  	<div class="pad action" v-on:click="undoPress">Undo</div>
-	  	<div class="pad" v-on:click="padPress(9)">0</div>
+	  	<div class="pad" v-on:click="padPress(0)">0</div>
 	  	<div class="pad action" v-on:click="clearPress">Clear</div>
   	</div>
 	</div>
@@ -29,7 +29,7 @@ export default {
       this.score.pop()
     },
     clearPress: function () {
-      this.score = []
+      this.$emit('clearPress')
     }
   },
   computed: {
