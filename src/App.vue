@@ -35,6 +35,7 @@ export default {
   text-align:center;
   color:#ffffff;
   text-decoration: none;
+  margin:0 auto;
 }
 
 .button-alt {
