@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted: function () {
+    this.$store.dispatch('LOAD_CHECKOUTS')
+  }
 }
 </script>
 

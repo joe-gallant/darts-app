@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -14,11 +15,22 @@ const store = new Vuex.Store({
       name: 'Player 2',
       score: 501,
       turn: false
-    }
+    },
+    checkouts: []
   },
   actions: {
+    LOAD_CHECKOUTS: function ({ commit }) {
+      axios.get('/store/checkouts.json').then((response) => {
+        commit('SET_CHECKOUTS', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    }
   },
   mutations: {
+    SET_CHECKOUTS: (state, { list }) => {
+      state.checkouts = list
+    },
     submitScore (state, score) {
       if (state.player1.turn) {
         state.player1.score = state.player1.score - score
