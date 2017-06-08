@@ -13,5 +13,9 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  mounted: function () {
+    this.$store.dispatch('LOAD_CHECKOUTS')
+    this.$store.getters.GET_CHECKOUT
+  }
 })

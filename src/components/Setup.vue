@@ -8,11 +8,11 @@
 		<hr>
 
     <h3>Game mode</h3>
-		<input type="radio" value="201" name="mode1" id="mode1" checked>
+		<input type="radio" value="201" name="mode1" id="mode1" v-on:change="updateGameMode" checked>
 		<label class="mode" for="mode1">201</label>
-		<input type="radio" value="301" name="mode1" id="mode2">
+		<input type="radio" value="301" name="mode1" id="mode2" v-on:change="updateGameMode">
 		<label class="mode" for="mode2">301</label>
-		<input type="radio" value="501" name="mode1" id="mode3">
+		<input type="radio" value="501" name="mode1" id="mode3" v-on:change="updateGameMode">
 		<label class="mode" for="mode3">501</label>
 
 		<hr>
@@ -44,6 +44,9 @@ export default {
     },
     update2Name (e) {
       this.$store.commit('update2Name', e.target.value)
+    },
+    updateGameMode (e) {
+      this.$store.commit('updateGameMode', e.target.value)
     }
   }
 }
