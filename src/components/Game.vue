@@ -6,14 +6,14 @@
           <div class="name">{{ player1.name }}</div>
           <div class="score">
             {{ player1.score }}
-            <span class="finish" v-if="player1.checkoutFinish.dart1">{{ player1.checkoutFinish.dart1 }} + {{ player1.checkoutFinish.dart2 }} + {{ player1.checkoutFinish.dart3 }}</span>
+            <span class="finish" v-if="player1.checkoutFinish.dart1">{{ player1.checkoutFinish.dart1 }} <span v-if="player1.checkoutFinish.dart2">+</span> {{ player1.checkoutFinish.dart2 }} <span v-if="player1.checkoutFinish.dart3">+</span> {{ player1.checkoutFinish.dart3 }}</span>
           </div>
         </div>
         <div class="player player2" v-bind:class="{ active: player2.turn }">
           <div class="name">{{ player2.name }}</div>
           <div class="score">
             {{ player2.score }}
-            <span class="finish" v-if="player2.checkoutFinish.dart1">{{ player2.checkoutFinish.dart1 }} + {{ player2.checkoutFinish.dart2 }} + {{ player2.checkoutFinish.dart3 }}</span>
+            <span class="finish" v-if="player2.checkoutFinish.dart1">{{ player2.checkoutFinish.dart1 }} <span v-if="player2.checkoutFinish.dart2">+</span> {{ player2.checkoutFinish.dart2 }} <span v-if="player2.checkoutFinish.dart3">+</span> {{ player2.checkoutFinish.dart3 }}</span>
           </div>
         </div>
  			</div>

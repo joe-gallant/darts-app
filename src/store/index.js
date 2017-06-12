@@ -45,12 +45,12 @@ const store = new Vuex.Store({
           // switch players
           state.player1.turn = false
           state.player2.turn = true
+
+          // set checkout finish to players state
+          state.player1.checkoutFinish = store.getters.getCheckout(player1Score)
         } else if (player1Score === 0) {
           alert('Player 1 wins')
         }
-
-        // set checkout finish to players state
-        state.player1.checkoutFinish = store.getters.getCheckout(player1Score)
       } else {
         var player2Score = state.player2.score - score
 
@@ -61,12 +61,12 @@ const store = new Vuex.Store({
           // switch players
           state.player2.turn = false
           state.player1.turn = true
+
+          // set checkout finish to players state
+          state.player2.checkoutFinish = store.getters.getCheckout(player2Score)
         } else if (player2Score === 0) {
           alert('Player 2 wins')
         }
-
-        // set checkout finish to players state
-        state.player2.checkoutFinish = store.getters.getCheckout(player2Score)
       }
     },
     update1Name (state, value) {
@@ -87,10 +87,10 @@ const store = new Vuex.Store({
       var validCheckout = state.checkouts[score]
 
       // return as false if finish not available
-      if (typeof validCheckout !== 'undefined') {
-        return validCheckout
-      } else {
+      if (typeof validCheckout === 'undefined' || validCheckout === null) {
         return false
+      } else {
+        return validCheckout
       }
     }
   }
